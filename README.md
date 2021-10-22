@@ -6,4 +6,5 @@ Discord servers : https://discord.gg/TGjGUchWsk
 
 My discord : bynomed#6401
 
-Credit : shaw#0351
+Credit : shaw#0351 (https://github.com/shawqed)
+
