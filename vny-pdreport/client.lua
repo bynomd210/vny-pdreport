@@ -45,9 +45,9 @@ CreateThread(function()
 
         if isProximity or isProximity2 then
             if isProximity and IsControlJustReleased(0, key_report) then
-                TriggerServerEvent('veny openReport')
+                TriggerServerEvent('veny: openReport')
             elseif isProximity2 and IsControlJustReleased(0, key_police) then
-                TriggerServerEvent('veny openAllReports')
+                TriggerServerEvent('veny: openAllReports')
             end
 
             sleep = 10
@@ -72,7 +72,7 @@ CreateThread(function()
         for i,k in pairs(npc_coords) do
             if #(pos - k) < distance_to_show_notify_npc then
                 if not isProximity then
-                    TriggerEvent('veny PoliceReportNotify', translate.TR_PROXIMITY_NPC)    
+                    TriggerEvent('veny: PoliceReportNotify', translate.TR_PROXIMITY_NPC)    
                 end
 
                 isProximity = true
@@ -88,7 +88,7 @@ CreateThread(function()
         for i,k in pairs(computer_coords) do
             if #(pos - k) < distance_to_show_notify_computer then
                 if not isProximity2 then
-                    TriggerEvent('veny PoliceReportNotify', translate.TR_PROXIMITY_COMPUTER)
+                    TriggerEvent('veny: PoliceReportNotify', translate.TR_PROXIMITY_COMPUTER)
                 end
 
                 isProximity2 = true
@@ -105,8 +105,8 @@ CreateThread(function()
     end
 end)
 
-RegisterNetEvent('veny openReport')
-AddEventHandler('veny openReport', function(namePlayer)
+RegisterNetEvent('veny: openReport')
+AddEventHandler('veny: openReport', function(namePlayer)
     if not wait_time then
         SendNUIMessage({
             openReport = true,
@@ -115,12 +115,12 @@ AddEventHandler('veny openReport', function(namePlayer)
 
         SetNuiFocus(true, true)
     else
-        TriggerEvent('veny PoliceReportNotify', translate.TR_WAIT)
+        TriggerEvent('veny: PoliceReportNotify', translate.TR_WAIT)
     end
 end)
 
-RegisterNetEvent('veny openAllReports')
-AddEventHandler('veny openAllReports', function(result)
+RegisterNetEvent('veny: openAllReports')
+AddEventHandler('veny: openAllReports', function(result)
     SendNUIMessage({
         openAllReports = true,
         reports = result
@@ -129,8 +129,8 @@ AddEventHandler('veny openAllReports', function(result)
     SetNuiFocus(true, true)
 end)
 
-RegisterNetEvent('veny PoliceReportNotify')
-AddEventHandler('veny PoliceReportNotify', function(notify)
+RegisterNetEvent('veny: PoliceReportNotify')
+AddEventHandler('veny: PoliceReportNotify', function(notify)
     SendNUIMessage({
         Notify = notify
     })
@@ -142,7 +142,7 @@ RegisterNUICallback('saveReport', function(data, cb)
         wait_time = false
     end)
     
-    TriggerServerEvent("veny saveReport", data)
+    TriggerServerEvent("veny: saveReport", data)
 
     cb('ok')
 end)
